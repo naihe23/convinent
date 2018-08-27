@@ -1,0 +1,46 @@
+#content_left {
+    position: absolute;
+    width: 250px;
+    height: 370px;
+    max-width: 340px;
+    top: 150px;
+    left: 130px;
+    border: 1px solid #f9fff6;
+}
+
+#content_center {
+    position: absolute;
+    width: 250px;
+    height: 370px;
+    max-width: 340px;
+    top: 150px;
+    margin-left: 560px;
+    border: 1px solid #f9fff6;
+}
+
+#content_right {
+    position: absolute;
+    width: 250px;
+    height: 370px;
+    max-width: 340px;
+    top: 150px;
+    left: 1000px;
+    border: 1px solid #f9fff6;
+}
+
+.vintage5 {
+    font-family: cursive;
+    text-shadow: 6px 2px 2px #333;
+    color: #87b8d3;
+    font-size: 45px;
+}
+
+@keyframes masked-animation {
+    0% {
+        background-position: 0  0;
+    }
+    100% {
+        background-position: -100%  0;
+    }
+}
+
