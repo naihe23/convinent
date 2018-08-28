@@ -12,10 +12,13 @@
     <link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.css">
 </head>
 <body>
-<button class="btn btn-primary" data-toggle="modal" data-target="#mymodal-data" type="button">通过data-target触发</button>
 <div>
-    <img src="/user/getCode" alt="验证码">
+    <form>
+        <a data-toggle="modal" href="#mymodal-data">忘记密码</a>
+
+    </form>
 </div>
+
 <!-- 模态弹出窗内容 -->
 <div class="modal fade" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog">

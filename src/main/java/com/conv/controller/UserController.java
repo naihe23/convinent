@@ -49,6 +49,10 @@ public class UserController {
         return "user_login";
     }
 
+    @RequestMapping("/forget")
+    public String forget(){
+        return "edit_password";
+    }
 
     @RequestMapping(value = "/index.do")
     public String indexDo(){
@@ -201,5 +205,10 @@ public class UserController {
             return null;
         }
         return user;
+    }
+
+    @RequestMapping(value = "/forgetPassword.do",method = RequestMethod.POST)
+    public void forgetPassword(){
+
     }
 }
