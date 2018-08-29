@@ -27,18 +27,20 @@ $(function () {
             var $email = $("#userEmail").val();
             //ajax请求
             $.ajax({
-                url: "/user/edit_password.do",
+                url: "/user/save_password.do",
                 type: "post",
                 async: false,
                 data:$("#loginForm").serialize(),
                 success: function (responseText) {
+                    alert(responseText);
                    if (responseText == "editSuccess"){
                        alert("修改成功");
                    } else if(responseText == "editFail"){
                        alert("修改失败")
-                   }else {
+                   }else if(responseText == "overTime"){
                        alert("链接超时！");
-                   }
+                   }else
+                       alert("操作失败");
                 },
                 error: function (response, ajaxOptions, thrownError) {
                     alert("系统错误");

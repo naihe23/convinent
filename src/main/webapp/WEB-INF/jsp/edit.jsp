@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,11 +22,11 @@
 <body>
 <div id="particles-js">
     <div class="container" style="position: absolute;left: 120px;top: 70px">
-        <form class="form-signin" action="${request.contextPath}/user/edit_password.do" method="post" id="loginForm">
-
+        <form class="form-signin" action="${request.contextPath}/user/save_password.do" method="post" id="loginForm">
+            <input type="hidden" value="${userId}" name="userId">
             <h2 class="form-signin-heading">忘记密码</h2>
             <div class="form-group">
-                <input type="text" class="form-control" name="userPassword" id="userEmail" placeholder="新密码"/>
+                <input type="password" class="form-control" name="userPassword" id="userEmail" placeholder="新密码"/>
             </div>
             <div class="form-group">
                 <input class="btn  btn-primary btn-block" type="submit" class="form-control" value="确认修改"/>

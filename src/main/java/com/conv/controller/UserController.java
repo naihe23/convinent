@@ -7,6 +7,7 @@ import com.conv.service.UserService;
 import com.conv.service.impl.EmailService;
 import com.conv.util.CodeUtils;
 import com.conv.util.EncryPassword;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -40,31 +41,6 @@ public class UserController {
 
     @Resource
     EmailService emailService;
-
-    @RequestMapping(value = "/register")
-    public String registerUser() {
-        return "register";
-    }
-
-    @RequestMapping("/login")
-    public String loginDo() {
-        return "user_login";
-    }
-
-    @RequestMapping("/forget")
-    public String forget(){
-        return "edit_password";
-    }
-
-    @RequestMapping(value = "/index.do")
-    public String indexDo(){
-        return "index";
-    }
-
-    @RequestMapping("/forgetPassword")
-    public String forgetPassword(){
-        return "edit";
-    }
     /**
      * 用户注册,发送激活邮件
      *
@@ -215,10 +191,7 @@ public class UserController {
     @RequestMapping(value = "/getUser.do",method = RequestMethod.POST)
     @ResponseBody
     public ActiveUser getUser(HttpSession session) {
-
-        System.out.println("getUser");
         ActiveUser user = (ActiveUser) session.getAttribute("activeUser");
-        System.out.println("active:"+user.getUserNickname());
         if (user == null) {
             return null;
         }
@@ -237,7 +210,7 @@ public class UserController {
         if(userEmail!=null){
             user = userService.validateUserExist(userEmail);
         }
-      //  emailService.sendMail(user);
+       emailService.sendForgetMail(user);
         user.setTokenExptime(new Date());
         userService.updateByPrimaryKeySelective(user);
         return "user_login";
@@ -249,7 +222,7 @@ public class UserController {
      * @param userId
      * @return
      */
-    @RequestMapping(value = "/edit_password.do")
+    @RequestMapping(value = "/save_password.do")
     @ResponseBody
     public String edit_password(User user,int userId){
         User user1 = null;
@@ -257,10 +230,12 @@ public class UserController {
             user1 = userService.selectUserByUserId(userId);
         }
         user  = EncryPassword.encryptedPassword(user);
+        System.out.println("tokenTime:"+user1.getTokenExptime());
         if (System.currentTimeMillis() - user1.getTokenExptime().getTime() < 8640000) {
             int isSuccess = userService.updateByPrimaryKeySelective(user);
+            System.out.println("isSuccess:"+isSuccess);
             if(isSuccess>0){
-                return "eidtSuccess";
+                return "editSuccess";
             }else
                 return "editFail";
         }else

@@ -44,16 +44,16 @@ public class EmailService{
         helper.setSubject(simpleMailMessage.getSubject());
         helper.setTo(user.getUserEmail());
         StringBuffer str =  new StringBuffer("</br>请点击下面链接修改密码，24小时生效 ，链接只能使用一次，请尽快激活！</br>");
-        str.append("<a href=\"http://localhost:8080/user/editPassword.do?userId=");
+        str.append("<a href=\"http://localhost:8080/user/edit?userId=");
         str.append(user.getUserId());
-        str.append("\">http://localhost:8080/user/actiUser.do?userId=");
+        str.append("\">http://localhost:8080/user/edit?userId=");
         str.append(user.getUserId());
         str.append("\"</a>\"+\"<br/>如果以上链接无法点击，请把上面网页地址复制到浏览器地址栏中打开<br/>");
         helper.setText(str.toString(),true);
         sendMailTask(message);
     }
 
-    private void sendMailTask(final MimeMessage message) throws Exception{
+    private void sendMailTask( MimeMessage message) throws Exception{
 
         taskExecutor.execute(new Runnable() {
             @Override
