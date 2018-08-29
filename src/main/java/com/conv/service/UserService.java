@@ -10,7 +10,7 @@ public interface UserService {
 
     User selectUserByUserId(int userId);
 
-    void updateByPrimaryKeySelective(User user);
+    int updateByPrimaryKeySelective(User user);
 
     void deleteByPrimaryKey(int userId);
 

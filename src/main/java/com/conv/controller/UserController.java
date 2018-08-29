@@ -6,6 +6,7 @@ import com.conv.model.User;
 import com.conv.service.UserService;
 import com.conv.service.impl.EmailService;
 import com.conv.util.CodeUtils;
+import com.conv.util.EncryPassword;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.RenderedImage;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -57,6 +59,11 @@ public class UserController {
     @RequestMapping(value = "/index.do")
     public String indexDo(){
         return "index";
+    }
+
+    @RequestMapping("/forgetPassword")
+    public String forgetPassword(){
+        return "edit";
     }
     /**
      * 用户注册,发送激活邮件
@@ -177,6 +184,12 @@ public class UserController {
         }
     }
 
+    /**
+     * 用户登录校验
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/userLogin.do")
     public String userLogin(HttpServletRequest request) throws Exception{
         String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
@@ -194,6 +207,11 @@ public class UserController {
         return "user_login";
     }
 
+    /**
+     * 获取用户信息
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/getUser.do",method = RequestMethod.POST)
     @ResponseBody
     public ActiveUser getUser(HttpSession session) {
@@ -207,8 +225,45 @@ public class UserController {
         return user;
     }
 
+    /**
+     * 发送邮件让用户去修改密码
+     * @param userEmail
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/forgetPassword.do",method = RequestMethod.POST)
-    public void forgetPassword(){
+    public String forgetPassword(String userEmail) throws Exception{
+        User user = null;
+        if(userEmail!=null){
+            user = userService.validateUserExist(userEmail);
+        }
+      //  emailService.sendMail(user);
+        user.setTokenExptime(new Date());
+        userService.updateByPrimaryKeySelective(user);
+        return "user_login";
+    }
 
+    /**
+     * 修改密码
+     * @param user
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/edit_password.do")
+    @ResponseBody
+    public String edit_password(User user,int userId){
+        User user1 = null;
+        if(String.valueOf(userId)!=null){
+            user1 = userService.selectUserByUserId(userId);
+        }
+        user  = EncryPassword.encryptedPassword(user);
+        if (System.currentTimeMillis() - user1.getTokenExptime().getTime() < 8640000) {
+            int isSuccess = userService.updateByPrimaryKeySelective(user);
+            if(isSuccess>0){
+                return "eidtSuccess";
+            }else
+                return "editFail";
+        }else
+            return "overTime";
     }
 }
