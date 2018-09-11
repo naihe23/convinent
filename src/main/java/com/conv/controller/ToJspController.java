@@ -38,4 +38,14 @@ public class ToJspController {
         model.addAttribute("userId",userId);
         return "edit";
     }
+
+    @RequestMapping("/bookmark")
+    public  String toBookmark(){
+        return "bookmark";
+    }
+
+    @RequestMapping("/memo")
+    public  String toMemo(){
+        return "memo";
+    }
 }

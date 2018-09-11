@@ -14,7 +14,7 @@
             </a>
         </div>
         <div>
-            <a href="work.html">
+            <a href="/user/bookmark">
                 <div>
                     <h1>网页收藏夹</h1>
                     <span></span>
@@ -26,7 +26,7 @@
             </a>
         </div>
         <div>
-            <a href="360.html">
+            <a href="/user/memo">
                 <div>
                     <h1>个人备忘录</h1>
                     <span></span>

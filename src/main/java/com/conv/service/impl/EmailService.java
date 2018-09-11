@@ -1,7 +1,9 @@
 package com.conv.service.impl;
 
 
+import com.conv.model.Memo;
 import com.conv.model.User;
+import com.conv.service.UserService;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +16,8 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class EmailService{
 
+    @Resource
+    UserService userService;
     @Resource
     SimpleMailMessage simpleMailMessage;
     @Resource
@@ -48,10 +52,24 @@ public class EmailService{
         str.append(user.getUserId());
         str.append("\">http://localhost:8080/user/edit?userId=");
         str.append(user.getUserId());
-        str.append("\"</a>\"+\"<br/>如果以上链接无法点击，请把上面网页地址复制到浏览器地址栏中打开<br/>");
+        str.append("\"</a>\"+\"<br/>如果以上链接无法点击，请把上面网页地址复制到浏览器地址栏中打开<br/><hr/>");
         helper.setText(str.toString(),true);
         sendMailTask(message);
     }
+
+    public void sendMemo(Memo memo ) throws  Exception{
+        MimeMessage message  =  javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message,true,"UTF-8");
+        helper.setFrom(simpleMailMessage.getFrom());
+        helper.setSubject(simpleMailMessage.getSubject());
+        String email = userService.selectUserByUserId(memo.getUserId()).getUserEmail();
+        helper.setTo(email);
+        StringBuffer str =  new StringBuffer("</br><h2>备忘录</h2></br></hr>");
+        str.append(memo.getMemoContent());
+        helper.setText(str.toString(),true);
+        sendMailTask(message);
+    }
+
 
     private void sendMailTask( MimeMessage message) throws Exception{
 

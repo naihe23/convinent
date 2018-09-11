@@ -29,7 +29,10 @@ text-align:center; ">
         <div class="col-lg-6 gover_search">
             <div class="input-group gover_search_form clearfix">
 
-                <input class="form-control input-lg " type="text" placeholder="请输入您自定义的网站名..." id="condition">
+                <input class="form-control input-lg "
+                       data-container="body" data-toggle="popover" data-placement="bottom" title="网站地址"
+                       data-content="" type="text" placeholder="请输入您自定义的网站名..." id="condition">
+
                 <span class="input-group-btn" style="padding-left: 5px">
                     <button class="btn btn-primary btn-lg" type="button" id="search">搜索</button>
                 </span>
@@ -111,6 +114,8 @@ text-align:center; ">
                             <td>网站命名：</td>
                             <td>操作：</td>
                         </tr>
+                        <tbody id="webSiteContent">
+                        </tbody>
                         <input type="hidden" id="manageSiteContent">
                     </table>
 
@@ -148,5 +153,7 @@ text-align:center; ">
 <script src="<%=request.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/header.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/modelCenter.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/bookmark.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/getUser.js"></script>
 </body>
 </html>

@@ -50,4 +50,5 @@
 
     <bean class="com.conv.exception.MyException"/>
 
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
 </beans>  

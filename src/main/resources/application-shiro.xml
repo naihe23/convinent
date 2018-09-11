@@ -12,7 +12,8 @@
                 /user/userLogin.do = authc
                 /logout.do = logout
                 /user/index.do = authc
-                /**=anon
+                /user/bookmark = authc
+                /** = anon
             </value>
         </property>
         <property name="filters">

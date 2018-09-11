@@ -18,11 +18,19 @@
     from table_memo
     where memo_id = #{memoId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from table_memo
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from table_memo
     where memo_id = #{memoId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.conv.model.Memo">
+  <insert id="insert" parameterType="com.conv.model.Memo" useGeneratedKeys="true" keyProperty="memoId">
     insert into table_memo (memo_id, edit_time, send_time, 
       user_id, state, memo_content
       )

@@ -41,7 +41,7 @@
 </div>
 
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.2.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/css/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/particles.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/app.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrapValidator.min.js"></script>

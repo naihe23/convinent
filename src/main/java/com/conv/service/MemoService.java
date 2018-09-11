@@ -1,10 +1,12 @@
-package com.conv.dao;
+package com.conv.service;
 
 import com.conv.model.Memo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface MemoMapper {
+public interface MemoService {
+
     int deleteByPrimaryKey(Integer memoId);
 
     int insert(Memo record);

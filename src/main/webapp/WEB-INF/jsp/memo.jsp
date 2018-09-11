@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/cleanDefault.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/content.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/memo.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap-datetimepicker.min.css">
 </head>
 <body>
 <jsp:include page="narbar.jsp"/>
@@ -49,7 +50,7 @@
             <!--增加备忘录-->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="addMemo" style="display: none">
                 <h2 class="sub-header">增加备忘录</h2>
-                <form class="form-horizontal" method="post" action="">
+                <form class="form-horizontal" method="post" action="/memo/addMemo" id="sendForm">
                     <div class="form-group">
                         <label for="inputEmail" class="col-sm-2 control-label">邮箱地址：</label>
                         <div class="col-sm-10">
@@ -58,7 +59,7 @@
                     </div>
 
                     <input type="hidden" name="userId" id="userId">
-
+                    <input type="hidden" name="userEmail" id="userEmail">
                     <div class="form-group">
                         <label for="datetimepicker" class="col-sm-2 control-label">选择发送邮件的时间：</label>
                         <div class="col-sm-10">
@@ -73,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">增加备忘录</button>
+                            <button type="submit" class="btn btn-default" id="subButtonfd">增加备忘录</button>
                         </div>
                     </div>
                 </form>
@@ -81,7 +82,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,9 +121,13 @@
 
 </div>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.2.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/css/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/header.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/getUser.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/memo.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/bootstrap-datetimepicker.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/bootstrap-datetimepicker.fr.js"></script>
+
 </body>
 </html>
 

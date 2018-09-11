@@ -9,7 +9,7 @@ public class Memo {
 
     private Date sendTime;
 
-    private String userId;
+    private int userId;
 
     private Integer state;
 
@@ -39,12 +39,12 @@ public class Memo {
         this.sendTime = sendTime;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public Integer getState() {
